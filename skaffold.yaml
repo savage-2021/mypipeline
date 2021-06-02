@@ -1,0 +1,22 @@
+apiVersion: skaffold/v2beta16
+kind: Config
+metadata:
+  name: mypipline
+build:
+  artifacts:
+  - image: danielsavage1/backend
+    context: backend
+    docker:
+      dockerfile: Dockerfile
+  - image: danielsavage1/frontend
+    context: ui/very_basic_ui
+    docker:
+      dockerfile: Dockerfile
+deploy:
+  kubectl:
+    manifests:
+    - k8s/api-cluster-ip-service.yaml
+    - k8s/api-deployment.yaml
+    - k8s/client-cluster-ip-deployment.yaml
+    - k8s/client-deployment.yaml
+    - k8s/ingress-service.yaml
