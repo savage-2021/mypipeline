@@ -3,6 +3,8 @@ kind: Config
 metadata:
   name: mypipline
 build:
+  local:
+    push: true
   artifacts:
   - image: danielsavage1/backend
     context: backend
@@ -20,3 +22,20 @@ deploy:
     - k8s/client-cluster-ip-deployment.yaml
     - k8s/client-deployment.yaml
     - k8s/ingress-service.yaml
+# deploy:
+#   kustomize:
+#     paths:
+#       - ./deploy/dev
+
+# profiles:
+#   - name: production
+#     deploy:
+#       kustomize:
+#         paths:
+#           - ./deploy/prod
+
+#   - name: staging
+#     deploy:
+#       kustomize:
+#         paths:
+#           - ./deploy/stg
